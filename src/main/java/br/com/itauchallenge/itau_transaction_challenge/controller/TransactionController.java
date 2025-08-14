@@ -36,11 +36,14 @@ public class TransactionController {
     
 
     // Apagar Transaçoes ------------------>
-    @DeleteMapping("/{id}") 
-    public String deleteTransaction(@PathVariable Long id){                                                
-        if (transactions.remove(id) != null)                                     // Remove a transação do mapa usando o ID fornecido
-            return "Transaçao removida!";                                        // Retorna mensagem de sucesso
-        return "Transaçao nao foi removida!";                                    // Caso contrário, não havia transação com o ID informado
+    @DeleteMapping("/all")
+    public String deleteAllTransactions() {
+        if (!transactions.isEmpty()) {                                           // Verifica se o mapa esta vazio
+            transactions.clear();                                                // Limpa todas as entradas do mapa
+            return "Todas as transações foram removidas!";
+        } else {
+            return "Não há transações para remover!";
+        }
     }
 
     // Listar Transações------------------->
